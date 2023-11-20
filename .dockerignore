@@ -1,0 +1,4 @@
+*
+!/huaweicloud/*.tf
+!/huaweicloud/.terraform.lock.hcl
+!query.sh
