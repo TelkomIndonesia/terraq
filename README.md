@@ -7,7 +7,7 @@ A simple example of using terraform to only Extract data from providers as JSON 
 For example to run the module in `/src/huaweicloud` inside the container, run:
 
 ```bash
-docker run -it --rm \
+docker run --rm \
     --env-file .env \
     ghcr.io/telkomindonesia/terraq huaweicloud
 ```
@@ -17,7 +17,7 @@ docker run -it --rm \
 You can mount your terraform module under `/src` directory on the container and then pass the directory name as the first argument.
 
 ```bash
-docker run -it --rm \
+docker run --rm \
     --env-file .env \
     -v $PWD/example:/src/example \
     ghcr.io/telkomindonesia/terraq example
