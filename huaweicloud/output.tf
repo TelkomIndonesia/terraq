@@ -25,3 +25,17 @@ output "secgroup" {
 output "obs" {
   value = local.obs
 }
+
+output "nat" {
+  value = local.nat
+}
+
+
+output "test" {
+  value = flatten([
+    for v in data.huaweicloud_vpc_route_table.all : [
+      for r in v.route :
+      r.nexthop if r.type == "nat"
+    ]
+  ])
+}
