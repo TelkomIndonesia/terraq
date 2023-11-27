@@ -5,10 +5,11 @@ data "huaweicloud_networking_secgroup" "all" {
 }
 
 locals {
-  secgroup = [
-    for v in data.huaweicloud_networking_secgroups.all.security_groups :
-    merge(v, {
-      rules = try(data.huaweicloud_networking_secgroup.all[v.id].rules, null)
-    })
-  ]
+  secgroup = data.huaweicloud_networking_secgroups.all.security_groups
+  secgroup_rules = flatten([
+    for k, v in data.huaweicloud_networking_secgroup.all : [
+      for r in v.rules :
+      merge(r, { secgroup_id = k })
+    ]
+  ])
 }

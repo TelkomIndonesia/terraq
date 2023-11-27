@@ -10,11 +10,17 @@ data "huaweicloud_vpc_route_table" "all" {
 }
 
 locals {
-  vpc = [
-    for v in data.huaweicloud_vpcs.all.vpcs :
-    merge(v, {
-      subnets      = try(data.huaweicloud_vpc_subnets.all[v.id].subnets, null)
-      route_tables = try(data.huaweicloud_vpc_route_table.all[v.id].route, null)
-    })
-  ]
+  vpc = data.huaweicloud_vpcs.all.vpcs
+  vpc_subnets = flatten([
+    for k, v in data.huaweicloud_vpc_subnets.all : [
+      for s in v.subnets :
+      merge(s, { vpc_id = k })
+    ]
+  ])
+  vpc_route_tables = flatten([
+    for k, v in data.huaweicloud_vpc_route_table.all : [
+      for r in v.route :
+      merge(r, { vpc_id = k })
+    ]
+  ])
 }

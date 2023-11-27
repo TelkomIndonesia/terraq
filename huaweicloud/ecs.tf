@@ -9,6 +9,22 @@ locals {
       flavor_id   = null
       flavor_name = null
       user_data   = null
+
+      # split
+      network         = null
+      volume_attached = null
     })
   ]
+  ecs_networks = flatten([
+    for ecs in data.huaweicloud_compute_instances.all.instances : [
+      for v in ecs.network :
+      merge(v, { ecs_id : ecs.id })
+    ]
+  ])
+  ecs_volumes = flatten([
+    for ecs in data.huaweicloud_compute_instances.all.instances : [
+      for v in ecs.volume_attached :
+      merge(v, { ecs_id : ecs.id })
+    ]
+  ])
 }

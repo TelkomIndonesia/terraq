@@ -15,6 +15,36 @@ locals {
           db_versions        = null
         }
       )
+
+      # split 
+      backup_strategy = null
+      db              = null
+      nodes           = null
+      volume          = null
     })
   ]
+  rds_backup_strategy = flatten([
+    for rds in data.huaweicloud_rds_instances.all.instances : [
+      for v in rds.backup_strategy :
+      merge(v, { rds_id = rds.id })
+    ]
+  ])
+  rds_db = flatten([
+    for rds in data.huaweicloud_rds_instances.all.instances : [
+      for v in rds.db :
+      merge(v, { rds_id = rds.id })
+    ]
+  ])
+  rds_nodes = flatten([
+    for rds in data.huaweicloud_rds_instances.all.instances : [
+      for v in rds.nodes :
+      merge(v, { rds_id = rds.id })
+    ]
+  ])
+  rds_volume = flatten([
+    for rds in data.huaweicloud_rds_instances.all.instances : [
+      for v in rds.volume :
+      merge(v, { rds_id = rds.id })
+    ]
+  ])
 }
