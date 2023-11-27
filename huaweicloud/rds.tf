@@ -23,13 +23,13 @@ locals {
       volume          = null
     })
   ]
-  rds_backup_strategy = flatten([
+  rds_backup_strategies = flatten([
     for rds in data.huaweicloud_rds_instances.all.instances : [
       for v in rds.backup_strategy :
       merge(v, { rds_id = rds.id })
     ]
   ])
-  rds_db = flatten([
+  rds_databases = flatten([
     for rds in data.huaweicloud_rds_instances.all.instances : [
       for v in rds.db :
       merge(v, { rds_id = rds.id })
@@ -41,7 +41,7 @@ locals {
       merge(v, { rds_id = rds.id })
     ]
   ])
-  rds_volume = flatten([
+  rds_volumes = flatten([
     for rds in data.huaweicloud_rds_instances.all.instances : [
       for v in rds.volume :
       merge(v, { rds_id = rds.id })

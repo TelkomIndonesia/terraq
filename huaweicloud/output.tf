@@ -49,17 +49,17 @@ output "obs" {
 output "rds" {
   value = local.rds
 }
-output "rds_backup_strategy" {
-  value = local.rds_backup_strategy
+output "rds_backup_strategies" {
+  value = local.rds_backup_strategies
 }
-output "rds_db" {
-  value = local.rds_db
+output "rds_databases" {
+  value = local.rds_databases
 }
 output "rds_nodes" {
   value = local.rds_nodes
 }
-output "rds_volume" {
-  value = local.rds_volume
+output "rds_volumes" {
+  value = local.rds_volumes
 }
 
 output "secgroup" {
