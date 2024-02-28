@@ -38,8 +38,18 @@ output "evs_attachments" {
   value = local.evs_attachments
 }
 
-output "nat" {
-  value = local.nat
+output "iam_users" {
+  value = local.iam_users
+}
+output "iam_permission" {
+  value = local.iam_permissions
+}
+
+output "nat_gateways" {
+  value = local.nat_gateways
+}
+output "nat_private_gateways" {
+  value = local.nat_private_gateways
 }
 
 output "obs" {
@@ -77,4 +87,8 @@ output "vpc_subnets" {
 }
 output "vpc_route_tables" {
   value = local.vpc_route_tables
+}
+
+output "waf_domains" {
+  value = local.waf_domains
 }
